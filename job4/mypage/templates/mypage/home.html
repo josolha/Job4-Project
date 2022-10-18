@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<section id="places">
+    <div class="container">
+        <form action="{% url 'mypage:update' current_user.id %}" method="post" class="card pt-3">{% csrf_token %}
+            <div class="col-12 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">개인 정보</h4>
+                        <p class="card-description"> Personal info </p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">ID</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="" name="id" value='{{ current_user.id }}'/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Phone Number</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="" name="phone_number"
+                                               value="{{ current_user.phone_number }}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Gender</label>
+                                    <div class="col-sm-9">
+                                        <select name="gender" class="">
+                                            {% if current_user.gender is 0 %}
+                                            <option value="0" selected>Male</option>
+                                            {% else %}
+                                            <option value="0">Male</option>
+                                            {% endif %}
+                                            {% if current_user.gender is 1 %}
+                                            <option value="1" selected>Female</option>
+                                            {% else %}
+                                            <option value="1">Female</option>
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Date of Birth</label>
+                                    <div class="col-sm-9">
+                                        <input class="" name="birth" placeholder="dd/mm/yyyy"
+                                               value="{{ current_user.birth|date:'Y-m-d' }}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Username</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="" name="username"
+                                               value="{{ current_user.username }}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="" name="email" value="{{ current_user.email }}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Address</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="" name="address" value="{{ current_user.address }}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5"></div>
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">관심 직무</h4>
+                        <p class="card-description">관심직무를 선택해주세요</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input"> 경영·인사·총무·사무 </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" checked> 재무·회계·경리 </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" disabled> 마케팅·광고·홍보·조사
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" disabled checked>
+                                            인터넷·IT·통신·모바일·게임 </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-radio">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsRadios"
+                                                   id="optionsRadios1" value="" checked> 디자인 </label>
+                                    </div>
+                                    <div class="form-radio">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsRadios"
+                                                   id="optionsRadios2" value="option2"> 전자·기계·기술·화학·연구개발 </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-radio disabled">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsRadios2"
+                                                   id="optionsRadios3" value="option3" disabled> 영상·사진·촬영
+                                        </label>
+                                    </div>
+                                    <div class="form-radio disabled">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsRadio2"
+                                                   id="optionsRadios4" value="option4" disabled checked> 회계·세무·CPA
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5"></div>
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">관심 산업</h4>
+                        <p class="card-description">관심 산업을 선택해주세요</p>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-check form-check-flat">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input"> 서비스업 </label>
+                                    </div>
+                                    <div class="form-check form-check-flat">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" checked> 금융·은행업 </label>
+                                    </div>
+                                    <div class="form-check form-check-flat">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" disabled> IT·정보통신업 </label>
+                                    </div>
+                                    <div class="form-check form-check-flat">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" disabled checked> 판매·유통업
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-radio form-radio-flat">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="flatRadios1"
+                                                   id="flatRadios1" value="" checked> 제조·생산·화학업 </label>
+                                    </div>
+                                    <div class="form-radio form-radio-flat">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="flatRadios2"
+                                                   id="flatRadios2" value="option2"> 교육업 </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-radio form-radio-flat disabled">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="flatRadios3"
+                                                   id="flatRadios3" value="option3" disabled> 건설업
+                                        </label>
+                                    </div>
+                                    <div class="form-radio form-radio-flat disabled">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="flatRadios4"
+                                                   id="flatRadios4" value="option4" disabled checked>의료·제약업
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5"></div>
+            <div class="text-center">
+                <input type="submit" value="저장하기" class="btn btn-primary"/>
+                <a class="btn btn-light" href="{% url 'myauth:recover_pw' %}">비밀번호 변경</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

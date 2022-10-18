@@ -1,0 +1,444 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<section id="places">
+    <div class="container">
+        <div class="analytics-sparkle-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="analytics-sparkle-line reso-mg-b-30">
+                            <div class="analytics-content">
+                                <h5>기업</h5>
+                                <h4><span class="counter">{{ company_name }}</span> <span class="tuition-fees"></span>
+                                </h4>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="analytics-sparkle-line reso-mg-b-30">
+                            <div class="analytics-content">
+                                <h5>직무</h5>
+                                <h4><span class="counter">{{ task_name }}</span> <span class="tuition-fees"></span></h4>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br> <br>
+    <div class="container">
+        <div class="static-table-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="charts-single-pro responsive-mg-b-30">
+                            <div class="alert-title">
+                                <h4>"{{ company_name }}" 자소서 단어 빈도수 분석</h4>
+                            </div>
+                            <div id="bar1-chart">
+                                <canvas id="barchart1"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="charts-single-pro responsive-mg-b-30">
+                            <div class="alert-title">
+                                <h4>"{{ task_name }}" 자소서 단어 빈도수 분석</h4>
+                            </div>
+                            <div id="bar1-chart">
+                                <canvas id="barchart2"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div class="container">
+        <div class="charts-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="sparkline8-list">
+                            <div class="sparkline8-hd">
+                                <div class="main-sparkline8-hd">
+                                    <h4 id="show_name1"></h4>
+                                </div>
+                            </div>
+                            <div class="sparkline8-graph">
+                                <div class="static-table-list">
+                                    <table id="company_keyword" class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>순위</th>
+                                            <th>키워드</th>
+                                            <th>유사도</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="sparkline9-list mt-b-30 res-mg-t-30 analysis-progrebar-ctn">
+                            <div class="sparkline9-hd">
+                                <div class="main-sparkline9-hd">
+                                    <h4 id="show_name2"></h4>
+                                </div>
+                            </div>
+                            <div class="sparkline9-graph">
+                                <div class="static-table-list">
+                                    <table id='task_keyword' class="table sparkle-table">
+                                        <thead>
+                                        <tr>
+                                            <th>순위</th>
+                                            <th>키워드</th>
+                                            <th>유사도</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-5"></div>
+    <div class="mt-5"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="latest-blog-single blog-single-full-view">
+                    <div class="blog-details blog-sig-details">
+                        <h2>자소서 전문</h2>
+                        <span id='self-introduction'>
+                        {% for qna in questions_answers %}
+                            <div class="mt-3"></div>
+                            <p class="question"><strong>{{ qna.0 }}</strong></p>
+                            <p class="answer" style="display: none;">{{ qna.1 }}</p>
+                            <button class="btn btn-primary save" id="{{ qna.2 }}" style="display: none;">Save</button>
+                        {% endfor %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra-script %}
+<script src="/static/chart/js/wow.min.js"></script>
+<!-- price-slider JS
+    ============================================ -->
+<script src="/static/chart/js/jquery-price-slider.js"></script>
+<!-- meanmenu JS
+    ============================================ -->
+<script src="/static/chart/js/jquery.meanmenu.js"></script>
+<!-- owl.carousel JS
+    ============================================ -->
+<script src="/static/chart/js/owl.carousel.min.js"></script>
+<!-- sticky JS
+    ============================================ -->
+<script src="/static/chart/js/jquery.sticky.js"></script>
+<!-- scrollUp JS
+    ============================================ -->
+<script src="/static/chart/js/jquery.scrollUp.min.js"></script>
+<!-- mCustomScrollbar JS
+    ============================================ -->
+<script src="/static/chart/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/static/chart/js/scrollbar/mCustomScrollbar-active.js"></script>
+<!-- metisMenu JS
+    ============================================ -->
+<script src="/static/chart/js/metisMenu/metisMenu.min.js"></script>
+<script src="/static/chart/js/metisMenu/metisMenu-active.js"></script>
+<!-- Charts JS
+    ============================================ -->
+<script src="/static/chart/js/charts/Chart.js"></script>
+<!-- <script src="/static/chart/js/charts/bar-chart.js"></script> -->
+<!-- tab JS
+    ============================================ -->
+<script src="/static/chart/js/tab.js"></script>
+<!-- plugins JS
+    ============================================ -->
+<script src="/static/chart/js/plugins.js"></script>
+<!-- main JS
+    ============================================ -->
+<script src="/static/chart/js/main.js"></script>
+<!-- tawk chat JS
+    ============================================ -->
+<script src="/static/chart/js/tawk-chat.js"></script>
+<!-- sparkline JS
+    ============================================ -->
+<script src="/static/chart/js/sparkline/jquery.sparkline.min.js"></script>
+<script src="/static/chart/js/sparkline/sparkline-active.js"></script>
+
+<script type="text/javascript">
+
+function bar_item_click_handler(event, clicked_items){
+    if (!clicked_items) {
+        return;
+    }
+
+    word = clicked_items[0]._model.label;
+    // alert(word);
+    document.getElementById("show_name1").innerHTML = "\""+ word + "\" 키워드 유사도 분석";
+    $.ajax({
+        "url": "/letter/company",
+        "method": "get",
+        "data": { "key": word },
+        "dataType": "json",
+        "success": function(data, status, xhr) {
+
+            $('#company_keyword tbody').empty()
+            for (var tr_idx = 0; tr_idx < data.length; tr_idx++) {
+                var tr = $('<tr></tr>');
+
+                var td = $('<td></td>');
+                td.text(tr_idx+1)
+                tr.append(td)
+                td = $('<td></td>')
+                td.text(data[tr_idx][0])
+                tr.append(td)
+                td = $('<td></td>')
+                td.text(data[tr_idx][1])
+                tr.append(td)
+                $('#company_keyword tbody').append(tr);
+            }
+        },
+        'error': function(xhr, status, err) {
+            alert(err);
+        }
+
+    });
+
+}
+
+function bar_item_click_handler2(event, clicked_items){
+    if (!clicked_items) {
+        return;
+    }
+
+    word = clicked_items[0]._model.label;
+    // alert(word);
+    document.getElementById("show_name2").innerHTML = "\""+ word + "\" 키워드 유사도 분석";
+    $.ajax({
+        "url": "/letter/task",
+        "method": "get",
+        "data": { "key": word },
+        "dataType": "json",
+        "success": function(data, status, xhr) {
+
+            $('#task_keyword tbody').empty()
+            for (var tr_idx = 0; tr_idx < data.length; tr_idx++) {
+                var tr = $('<tr></tr>');
+
+                var td = $('<td></td>');
+                td.text(tr_idx+1)
+                tr.append(td)
+                td = $('<td></td>')
+                td.text(data[tr_idx][0])
+                tr.append(td)
+                td = $('<td></td>')
+                td.text(data[tr_idx][1])
+                tr.append(td)
+                $('#task_keyword tbody').append(tr);
+            }
+        },
+        'error': function(xhr, status, err) {
+            alert(err);
+        }
+
+
+
+    });
+
+
+}
+
+(function ($) {
+ "use strict";
+    /*----------------------------------------*/
+   /*  1.  Bar Chart
+    /*----------------------------------------*/
+
+   var ctx = document.getElementById("barchart1");
+   var barchart1 = new Chart(ctx, {
+      type: 'bar',
+      data: {
+         labels: ["{{ word_count.0.0 }}" , "{{ word_count.1.0 }}", "{{ word_count.2.0 }}", "{{ word_count.3.0 }}", "{{ word_count.4.0 }}",
+                 "{{ word_count.5.0 }}", "{{ word_count.6.0 }}", "{{ word_count.7.0 }}", "{{ word_count.8.0 }}", "{{ word_count.9.0 }}", ],
+         datasets: [{
+            label: '자주 나오는 키워드',
+            data: [{{ word_count.0.1 }} , {{ word_count.1.1 }}, {{ word_count.2.1 }}, {{ word_count.3.1 }}, {{ word_count.4.1 }},
+                  {{ word_count.5.1 }}, {{ word_count.6.1 }}, {{ word_count.7.1 }}, {{ word_count.8.1 }}, {{ word_count.9.1 }},],
+            backgroundColor: [
+               'rgba(255, 99, 132, 0.2)',
+               'rgba(54, 162, 235, 0.2)',
+               'rgba(255, 206, 86, 0.2)',
+               'rgba(75, 192, 192, 0.2)',
+               'rgba(153, 102, 255, 0.2)',
+               'rgba(255, 99, 132, 0.2)',
+               'rgba(54, 162, 235, 0.2)',
+               'rgba(255, 206, 86, 0.2)',
+               'rgba(75, 192, 192, 0.2)',
+               'rgba(153, 102, 255, 0.2)'
+            ],
+            borderColor: [
+               'rgba(255, 99, 132, 1)',
+               'rgba(54, 162, 235, 1)',
+               'rgba(255, 206, 86, 1)',
+               'rgba(75, 192, 192, 1)',
+               'rgba(153, 102, 255, 1)',
+               'rgba(255, 99, 132, 1)',
+               'rgba(54, 162, 235, 1)',
+               'rgba(255, 206, 86, 1)',
+               'rgba(75, 192, 192, 1)',
+               'rgba(153, 102, 255, 1)'
+            ],
+            borderWidth: 1
+         }]
+      },
+      options: {
+         //responsive: false,
+         scales: {
+            xAxes: [{
+               ticks: {
+
+                  fontColor: "black", // this here
+               }
+            }],
+            yAxes: [{
+               ticks: {
+                    min: 0,
+
+               fontColor: "black", // this here
+                  // autoSkip: false,
+                  // maxRotation: 0,
+
+               }
+            }]
+         },
+         onClick: bar_item_click_handler,
+      }
+    });
+
+   var ctx = document.getElementById("barchart2");
+   var barchart2 = new Chart(ctx, {
+      type: 'bar',
+      data: {
+         labels: ["{{ word_count2.0.0 }}" , "{{ word_count2.1.0 }}", "{{ word_count2.2.0 }}", "{{ word_count2.3.0 }}", "{{ word_count2.4.0 }}",
+                 "{{ word_count2.5.0 }}", "{{ word_count2.6.0 }}", "{{ word_count2.7.0 }}", "{{ word_count2.8.0 }}", "{{ word_count2.9.0 }}", ],
+         datasets: [{
+            label: '자주 나오는 키워드',
+            data: [{{ word_count2.0.1 }} , {{ word_count2.1.1 }}, {{ word_count2.2.1 }}, {{ word_count2.3.1 }}, {{ word_count2.4.1 }},
+                  {{ word_count2.5.1 }}, {{ word_count2.6.1 }}, {{ word_count2.7.1 }}, {{ word_count2.8.1 }}, {{ word_count2.9.1 }},],
+            backgroundColor: [
+               'rgba(255, 99, 132, 0.2)',
+               'rgba(54, 162, 235, 0.2)',
+               'rgba(255, 206, 86, 0.2)',
+               'rgba(75, 192, 192, 0.2)',
+               'rgba(153, 102, 255, 0.2)',
+               'rgba(255, 99, 132, 0.2)',
+               'rgba(54, 162, 235, 0.2)',
+               'rgba(255, 206, 86, 0.2)',
+               'rgba(75, 192, 192, 0.2)',
+               'rgba(153, 102, 255, 0.2)'
+            ],
+            borderColor: [
+               'rgba(255, 99, 132, 1)',
+               'rgba(54, 162, 235, 1)',
+               'rgba(255, 206, 86, 1)',
+               'rgba(75, 192, 192, 1)',
+               'rgba(153, 102, 255, 1)',
+               'rgba(255, 99, 132, 1)',
+               'rgba(54, 162, 235, 1)',
+               'rgba(255, 206, 86, 1)',
+               'rgba(75, 192, 192, 1)',
+               'rgba(153, 102, 255, 1)'
+            ],
+            borderWidth: 1
+         }]
+      },
+      options: {
+         scales: {
+            xAxes: [{
+               ticks: {
+
+                  fontColor: "black", // this here
+               },
+            }],
+            yAxes: [{
+               ticks: {
+                  min : 0,
+
+                  fontColor: "black", // this here
+               },
+            }]
+         },
+         onClick: bar_item_click_handler2,
+      }
+    });
+
+    $(".question").hover(function() {
+            $(this).css("color", "#3984F3");
+        },
+        function() {
+            $(this).css("color", "#7d7987");
+        }
+    );
+
+    $(".question").on('click', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        let index = $(".question").index(this);  // 0 부터 시작
+
+        $(".answer").eq(index).toggle();
+        $(".save").eq(index).toggle();
+    });
+
+    $(".save").on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        let idx = $(".save").index(this);
+        let id = $(".save").eq(idx).attr("id");
+        let user = "{{ request.session.user_id }}";
+
+        $.ajax({
+            "url": "/bookmark/save",
+            "method": "get",
+            "data": { "letter_id": id, "user_id": user },
+            "dataType": "json",
+            "success": function(data, status, xhr) {
+                alert("저장되었습니다 !");
+            },
+            'error': function(xhr, status, err) {
+                alert("저장에 실패했습니다.");
+            }
+        });
+    });
+
+})(jQuery);
+
+
+</script>
+{% endblock %}
