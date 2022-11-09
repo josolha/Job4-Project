@@ -1,3 +1,4 @@
+* linguist-vendored
 *.css linguist-detectable=false
 *.js linguist-detectable=false
 *.psd filter=lfs diff=lfs merge=lfs -text
